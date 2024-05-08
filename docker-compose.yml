@@ -1,19 +1,9 @@
 version: '3'
 services:
-  ping-test:
-    image: alpine
-    command: ["ping", "google.com"]
+  lpic-test:
+    image: dockette/docker-alpine-lpic
+    container_name: lpic-test
+    stdin_open: true
+    tty: true
     restart: unless-stopped
-    networks:
-      - test-network
-
-  curl-test:
-    image: curlimages/curl
-    command: ["curl", "https://sso.cloud.pje.jus.br"]
-    restart: unless-stopped
-    networks:
-      - test-network
-
-networks:
-  test-network:
-    driver: bridge
+    command: /bin/sh -c "apk add --no-cache iproute2 iputils curl wget netcat-openbsd && /bin/sh"
