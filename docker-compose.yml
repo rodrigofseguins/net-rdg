@@ -1,0 +1,19 @@
+version: '3'
+services:
+  ping-test:
+    image: alpine
+    command: ["ping", "google.com"]
+    restart: unless-stopped
+    networks:
+      - test-network
+
+  curl-test:
+    image: curlimages/curl
+    command: ["curl", "https://sso.cloud.pje.jus.br"]
+    restart: unless-stopped
+    networks:
+      - test-network
+
+networks:
+  test-network:
+    driver: bridge
